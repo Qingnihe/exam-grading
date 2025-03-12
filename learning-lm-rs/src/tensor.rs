@@ -6,6 +6,18 @@ pub struct Tensor<T> {
     length: usize,
 }
 
+impl<T: Clone> Clone for Tensor<T> {
+    fn clone(&self) -> Self {
+        Self {
+            data: self.data.clone(),
+            shape: self.shape.clone(),
+            offset: self.offset,
+            length: self.length,
+        }
+    }
+}
+
+
 impl<T: Copy + Clone + Default> Tensor<T> {
     pub fn new(data: Vec<T>, shape: &Vec<usize>) -> Self {
         let length = data.len();
